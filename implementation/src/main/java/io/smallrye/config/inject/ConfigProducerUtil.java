@@ -85,7 +85,8 @@ public class ConfigProducerUtil {
             }
         }
         // just try the raw type
-        return src.getConverter(rawType);
+        return src.getConverter(rawType).orElseThrow(() -> new IllegalArgumentException("No Converter registered for " +
+                rawType));
     }
 
     @SuppressWarnings("unchecked")
