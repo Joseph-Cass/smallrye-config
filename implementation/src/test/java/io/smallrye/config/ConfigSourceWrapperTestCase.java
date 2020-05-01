@@ -24,6 +24,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.microprofile.config.Config;
 import org.eclipse.microprofile.config.spi.ConfigSource;
@@ -96,6 +97,11 @@ public class ConfigSourceWrapperTestCase {
 
         public Map<String, String> getProperties() {
             return delegate.getProperties();
+        }
+
+        @Override
+        public Set<String> getPropertyNames() {
+            return delegate.getPropertyNames();
         }
 
         public String getValue(final String propertyName) {

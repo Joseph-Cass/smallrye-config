@@ -22,6 +22,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Comparator;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.microprofile.config.spi.ConfigSource;
 import org.junit.Test;
@@ -45,6 +46,11 @@ public class ConfigSourceSortTestCase {
         }
 
         public Map<String, String> getProperties() {
+            return null;
+        }
+
+        @Override
+        public Set<String> getPropertyNames() {
             return null;
         }
 
