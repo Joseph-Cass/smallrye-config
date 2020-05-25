@@ -1,7 +1,9 @@
 package io.smallrye.config.inject;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.microprofile.config.spi.ConfigSource;
 
@@ -24,6 +26,11 @@ public class InjectionTestConfigFactory extends SmallRyeConfigFactory {
                     @Override
                     public Map<String, String> getProperties() {
                         return new HashMap<>();
+                    }
+
+                    @Override
+                    public Set<String> getPropertyNames() {
+                        return new HashSet<>();
                     }
 
                     @Override
