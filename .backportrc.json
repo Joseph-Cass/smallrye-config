@@ -1,0 +1,9 @@
+{
+  "upstream": "smallrye/smallrye-config",
+  "targetBranchChoices": [
+    "master",
+    "1.x"
+  ],
+  "assignees": ["@smallrye/config"],
+  "fork": false
+}
