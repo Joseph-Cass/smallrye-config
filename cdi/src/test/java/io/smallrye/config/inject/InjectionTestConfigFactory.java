@@ -23,7 +23,7 @@ public class InjectionTestConfigFactory extends SmallRyeConfigFactory {
                 .addDefaultInterceptors()
                 .withSources(config("my.prop", "1234", "expansion", "${my.prop}", "secret", "12345678",
                         "mp.config.profile", "prof", "my.prop.profile", "1234", "%prof.my.prop.profile", "5678",
-                        "bad.property.expression.prop", "${missing.prop}"))
+                        "bad.property.expression.prop", "${missing.prop}", "bad.property", ",", "empty.property", ""))
                 .withSources(new ConfigSource() {
                     int counter = 1;
 

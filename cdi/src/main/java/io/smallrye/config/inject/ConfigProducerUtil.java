@@ -23,6 +23,7 @@ import org.eclipse.microprofile.config.spi.Converter;
 
 import io.smallrye.config.Converters;
 import io.smallrye.config.SecretKeys;
+import io.smallrye.config.SmallRyeConfig;
 
 /**
  * Actual implementations for producer method in CDI producer {@link ConfigProducer}.
@@ -40,37 +41,15 @@ public final class ConfigProducerUtil {
         if (name == null) {
             return null;
         }
-        return convertValue(name, resolveConverter(injectionPoint, config), getDefaultValue(injectionPoint), config);
-    }
 
-    public static <T> T getValue(String name, Type type, String defaultValue, Config config) {
-        if (name == null) {
-            return null;
-        }
-        return convertValue(name, resolveConverter(type, config), defaultValue, config);
-    }
-
-    public static <T> T convertValue(String name, Converter<T> converter, String defaultValue, Config config) {
         String rawValue = getRawValue(name, config);
         if (rawValue == null) {
-            rawValue = defaultValue;
+            rawValue = getDefaultValue(injectionPoint);
         }
 
-        T converted;
-        if (rawValue == null) {
-            // convert an empty value
-            try {
-                converted = converter.convert("");
-            } catch (IllegalArgumentException ignored) {
-                throw InjectionMessages.msg.propertyNotFound(name);
-            }
-        } else {
-            converted = converter.convert(rawValue);
-        }
-        if (converted == null) {
-            throw InjectionMessages.msg.propertyNotFound(name);
-        }
-        return converted;
+        Converter<T> converter = resolveConverter(injectionPoint, config);
+
+        return SmallRyeConfig.convertValue(name, rawValue, converter);
     }
 
     public static ConfigValue getConfigValue(InjectionPoint injectionPoint, Config config) {
